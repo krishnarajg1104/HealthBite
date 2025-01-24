@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles/style.css">
+    <title>TeamSynk - Canteen</title>
+</head>
+<body>
+    <nav class="sideBar close">
+        <header>
+            <div class="imageText">
+                <span class="image">
+                    <img src="#" alt="logo">
+                </span>
+                <div class="text headerText">
+                    <span class="name">TeamSynk</span>
+                    <span class="project">Canteen</span>
+                </div>
+                <i class='bx bx-chevron-right toggle'></i>
+            </div>
+        </header>
+        <div class="menuBar">
+            <div class="menu">
+                <ul class="menuLinks">
+                    <li class="navLink">
+                        <a href="index.html">
+                            <i class='bx bx-home icon' ></i>
+                            <span class="text navText">Home</span>
+                        </a>
+                    </li>
+                    <li class="navLink">
+                        <a href="masters.html">
+                            <i class='bx bx-book-add icon'></i>
+                            <span class="text navText">Masters</span>
+                        </a>
+                    </li>
+                    <li class="navLink">
+                        <a href="sales.html">
+                            <i class='bx bx-coffee icon'></i>
+                            <span class="text navText">OP Sales</span>
+                        </a>
+                    </li>
+                    <li class="navLink active">
+                        <a href="cancellation.html">
+                            <i class='bx bx-message-alt-x icon' ></i>
+                            <span class="text navText">Bill Cancellation</span>
+                        </a>
+                    </li>
+                    <li class="navLink">
+                        <a href="revenue.html">
+                            <i class='bx bx-chart icon'></i>
+                            <span class="text navText">Revenue</span>
+                        </a>
+                    </li>
+                    <li class="navLink">
+                        <a href="reports.html">
+                            <i class='bx bxs-report icon' ></i>
+                            <span class="text navText">Report</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="bottomContent">
+                <li class="navLink">
+                    <a href="#">
+                        <i class='bx bx-log-out-circle icon'></i>
+                        <span class="text navText">Logout</span>
+                    </a>
+                </li>
+            </div>
+        </div>
+    </nav>
+    <section class="home">
+        <div class="navBar">
+            <header class="text">Bill Cancellation</header>
+            <div class="navElement">
+                <div class="navItem" onclick="submitForm()">
+                    <i class='bx bx-save icon'></i>
+                    <button class="btn" onclick="submitForm()">Save</button>
+                </div>
+                <div class="navItem" onclick="clearForm()">
+                    <i class='bx bx-eraser icon' ></i>
+                    <button class="btn" onclick="clearForm()">Clear</button>
+                </div>
+                <div class="navItem">
+                    <i class='bx bx-grid icon'></i>
+                    <a href="#" class="navItem link">View Record</a>
+                </div>
+            </div>
+        </div>
+        <div class="mainContainer">
+            <div class="mainElement">
+                <div class="header">
+                    <div class="headerItem title">Bill Number</div>
+                    <input type="search" class="headerItem search" id="searchInput" placeholder="Search Bill Number">
+                    <div id="billList" style="display: none;"></div>               
+                </div>
+                <div class="form cancelForm">
+                    <form action="" class="cancel">
+                       <div class="formElement">
+                            <label for="billNo">Bill Number</label>
+                            <input type="text" name="billNo" id="billNo" disabled>
+                       </div>
+                       <div class="formElement">
+                            <label for="billDt">Bill Date</label>
+                            <input type="text" name="billDt" id="billDt" disabled>
+                        </div>
+                        <div class="formElement">
+                            <label for="grossAmt">Gross Amount</label>
+                            <input type="text" name="grossAmt" id="grossAmt" disabled>
+                       </div>
+                       <div class="formElement">
+                            <label for="concAmt">Concession Amount</label>
+                            <input type="text" name="concAmt" id="concAmt" disabled>
+                        </div>
+                        <div class="formElement">
+                            <label for="netAmt">Net Amount</label>
+                            <input type="text" name="netAmt" id="netAmt" disabled>
+                       </div>
+                       <div class="formElement">
+                            <label for="paidAmt">Paid Amount</label>
+                            <input type="text" name="paidAmt" id="paidAmt" disabled>
+                        </div>
+                        <div class="formElement">
+                            <label for="dueAmt">Due Amount</label>
+                            <input type="text" name="dueAmt" id="dueAmt" disabled>
+                       </div>
+                       <div class="formElement">
+                            <label for="authBy">Authorized By</label>
+                            <input type="text" name="authBy" id="authBy">
+                        </div>
+                        <div class="formElement">
+                            <label for="remarks">Remarks</label>
+                            <textarea name="remarks" id="remarks" rows="4" cols="50"></textarea>
+                       </div>
+                    </form>
+                </div>
+            </div>
+            <div class="subElement-C">
+                <div class="subSection">
+                    <div class="blockHeader">
+                        <h3 class="blockTitle">Item Info</h3>
+                    </div>
+                    <div class="subSectionElement form">
+                        <table id="itemTable">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAll"></th>
+                                    <th>Item Name</th>
+                                    <th>Qty</th>
+                                    <th>Rate</th>
+                                    <th>Amount</th>
+                                    <th>Discount</th>
+                                    <th>Net Amount</th>
+                                    <th>Tax</th>
+                                    <th>Record Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="itemTableBody">
+                                <!-- Dynamic content will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Predefined bill details for testing
+        const bills = [
+            {
+                billNo: 'B001',
+                billDt: '2025-01-01',
+                grossAmt: 100,
+                concAmt: 10,
+                netAmt: 90,
+                paidAmt: 50,
+                dueAmt: 40,
+                items: [
+                    { itemName: 'Coffee', qty: 1, rate: 10, amount: 10, discount: 0, netAmount: 10, tax: 0, status: 'A' },
+                    { itemName: 'Tea', qty: 5, rate: 5, amount: 5, discount: 0, netAmount: 5, tax: 0, status: 'A' }
+                ]
+            },
+            {
+                billNo: 'B002',
+                billDt: '2025-01-02',
+                grossAmt: 200,
+                concAmt: 20,
+                netAmt: 180,
+                paidAmt: 100,
+                dueAmt: 80,
+                items: [
+                    { itemName: 'Sandwich', qty: 1, rate: 20, amount: 20, discount: 0, netAmount: 20, tax: 0, status: 'A' },
+                    { itemName: 'Coffee', qty: 2, rate: 15, amount: 30, discount: 5, netAmount: 25, tax: 0, status: 'A' }
+                ]
+            }
+        ];
+
+        // Function to handle search input
+        document.getElementById('searchInput').addEventListener('input', function () {
+            const billNo = this.value.trim().toUpperCase();
+            const billList = document.getElementById('billList');
+            billList.innerHTML = '';
+
+            // Filter the bill numbers based on input
+            const filteredBills = bills.filter(bill => bill.billNo.includes(billNo));
+
+            if (filteredBills.length > 0) {
+                billList.style.display = 'block';
+                filteredBills.forEach(bill => {
+                    const billItem = document.createElement('div');
+                    billItem.classList.add('billItem');
+                    billItem.textContent = bill.billNo;
+                    billItem.addEventListener('click', () => populateBillDetails(bill));
+                    billList.appendChild(billItem);
+                });
+            } else {
+                billList.style.display = 'none';
+            }
+        });
+
+        // Populate the fields with the selected bill details
+        function populateBillDetails(bill) {
+            document.getElementById('billNo').value = bill.billNo;
+            document.getElementById('billDt').value = bill.billDt;
+            document.getElementById('grossAmt').value = bill.grossAmt;
+            document.getElementById('concAmt').value = bill.concAmt;
+            document.getElementById('netAmt').value = bill.netAmt;
+            document.getElementById('paidAmt').value = bill.paidAmt;
+            document.getElementById('dueAmt').value = bill.dueAmt;
+
+            // Populate the items table
+            const itemTableBody = document.getElementById('itemTableBody');
+            itemTableBody.innerHTML = '';
+            bill.items.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><input type="checkbox" class="rowCheckBox"></td>
+                    <td>${item.itemName}</td>
+                    <td><input type="number" value="${item.qty}" min="1" max="${item.qty}" class="qtyInput" disabled></td>
+                    <td>${item.rate}</td>
+                    <td>${item.amount}</td>
+                    <td>${item.discount}</td>
+                    <td>${item.netAmount}</td>
+                    <td>${item.tax}</td>
+                    <td>${item.status}</td>
+                `;
+                itemTableBody.appendChild(row);
+            });
+
+            // Hide the bill list after selection
+            document.getElementById('billList').style.display = 'none';
+        }
+
+        const selectAllCheckBox = document.getElementById('selectAll');
+
+            // Handle 'Select All' checkbox toggle
+            selectAllCheckBox.addEventListener('change', function() {
+                const isChecked = selectAllCheckBox.checked;
+                
+                const rowCheckboxes = Array.from(document.getElementsByClassName('rowCheckBox'));
+                const qtyInputs = document.getElementsByClassName('qtyInput');
+
+                // Loop through each row checkbox and set the state
+                rowCheckboxes.forEach((checkbox, index) => {
+                    checkbox.checked = isChecked;
+                    toggleQtyInputState(qtyInputs[index], isChecked);
+                });
+            });
+
+            // Handle individual row checkbox change
+            document.getElementById('itemTableBody').addEventListener('change', function(event) {
+                if (event.target && event.target.classList.contains('rowCheckBox')) {
+                    const rowCheckboxes = Array.from(document.getElementsByClassName('rowCheckBox'));
+                    const qtyInputs = document.getElementsByClassName('qtyInput');
+
+                    const allChecked = rowCheckboxes.every(cb => cb.checked);
+                    selectAllCheckBox.checked = allChecked; 
+
+                    // Enable/disable the quantity input for the selected row
+                    const rowIndex = rowCheckboxes.indexOf(event.target);
+                    toggleQtyInputState(qtyInputs[rowIndex], event.target.checked);
+                }
+            });
+
+            // Toggle the quantity input's disabled state based on checkbox status
+            function toggleQtyInputState(input, isEnabled) {
+                if (isEnabled) {
+                    input.disabled = false;
+                } else {
+                    input.disabled = true;
+                }
+            }
+
+            function clearForm() {
+            document.getElementById('billNo').value = '';
+            document.getElementById('billDt').value = '';
+            document.getElementById('grossAmt').value = '';
+            document.getElementById('concAmt').value = '';
+            document.getElementById('netAmt').value = '';
+            document.getElementById('paidAmt').value = '';
+            document.getElementById('dueAmt').value = '';
+            document.getElementById('authBy').value = '';
+            document.getElementById('remarks').value = '';
+            const table = document.getElementById('itemTable').getElementsByTagName('tbody')[0];
+            table.innerHTML = '';
+        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const body = document.querySelector("body"),
+            sideBar = body.querySelector(".sideBar"),
+            toggle = body.querySelector(".toggle");
+
+            toggle.addEventListener("click", () => {
+                sideBar.classList.toggle("close");
+            });
+        });
+    </script>
+</body>
+</html>
